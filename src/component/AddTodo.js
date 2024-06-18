@@ -7,6 +7,9 @@ class AddTodo extends Component {
     super();
     this.state = {
       content: "",
+      precon: "",
+      acceptancecrit: "",
+      date: "",
     };
   }
   // The handleChange function updates the react state with the new input value provided from the user.
@@ -14,7 +17,8 @@ class AddTodo extends Component {
   // into the text field.
   handleChange = (event) => {
     this.setState({
-      content: event.target.value,
+      [event.target.name]: event.target.value,
+      date: Date().toLocaleString('en-US')
     });
   };
   // The handleSubmit function collects the forms input and puts it into the react state.
@@ -27,6 +31,9 @@ class AddTodo extends Component {
       this.props.addTodo(this.state);
       this.setState({
         content: "",
+        precon: "",
+        acceptancecrit: "",
+        date: "",
       });
     }
   };
@@ -41,11 +48,26 @@ class AddTodo extends Component {
       // 4. The value of the text field also should reflect the local state of this component.
       <div>
         <TextField
+          name="content"
           label="Add New Item"
           variant="outlined"
           onChange={this.handleChange}
           value={this.state.content}
           data-testid="new-item-textfield"
+        />
+        <TextField
+          name="precon"
+          label="New Item Pre-conditions"
+          variant="outlined"
+          onChange={this.handleChange}
+          value={this.state.precon}
+        />
+        <TextField
+          name="acceptancecrit"
+          label="New Item Acceptance Criteria"
+          variant="outlined"
+          onChange={this.handleChange}
+          value={this.state.acceptancecrit}
         />
         <Button
           style={{ marginLeft: "10px" }}
